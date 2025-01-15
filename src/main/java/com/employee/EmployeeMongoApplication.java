@@ -8,6 +8,7 @@ public class EmployeeMongoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeMongoApplication.class, args);
+
 	}
 
 }
