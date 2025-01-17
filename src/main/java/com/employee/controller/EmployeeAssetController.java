@@ -1,11 +1,9 @@
 package com.employee.controller;
-
 import com.employee.entity.EmployeeAsset;
 import com.employee.service.EmployeeAssetService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
@@ -17,27 +15,26 @@ public class EmployeeAssetController {
     EmployeeAssetService employeeAssetService;
 
 
-    @GetMapping("/getadata/{id}")
-    public EmployeeAsset getAEmployeeAssetById(@PathVariable ObjectId id) {
+    @GetMapping("/getadata")
+    public EmployeeAsset getAEmployeeAssetById(@RequestParam ObjectId id) {
         return employeeAssetService.getEmployeeAsset(id);
     }
 
     @PostMapping("/postadata")
-    public String createEmployeeAssetDetails(@RequestBody EmployeeAsset employeeAsset) {
+    public String createEmployeeAssetDetails(@RequestParam String name, @RequestParam Integer asset) {
 
-        return employeeAssetService.saveEmployeeAsset(employeeAsset);
+        return employeeAssetService.saveEmployeeAsset(name, asset);
     }
 
-    @PutMapping("/updateadata/{id}")
-    public String updateEmployeeAssetDetails(@PathVariable ObjectId id, @RequestBody EmployeeAsset updatedEmployeeAsset) {
+    @PutMapping("/updateadata")
+    public String updateEmployeeAssetDetails(@RequestParam ObjectId id, @RequestBody EmployeeAsset updatedEmployeeAsset) {
 
         return employeeAssetService.updateEmployeeAsset(id, updatedEmployeeAsset);
     }
 
 
-
-    @DeleteMapping("/deleteadata/{id}")
-    public String deleteEmployeeAssetDetails(@PathVariable ObjectId id) {
+    @DeleteMapping("/deleteadata")
+    public String deleteEmployeeAssetDetails(@RequestParam ObjectId id) {
 
         return employeeAssetService.deleteEmployeeAsset(id);
     }

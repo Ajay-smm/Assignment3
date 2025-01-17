@@ -16,28 +16,28 @@ public class EmployeeController {
     EmployeeService employeeService;
 
 
-    @GetMapping("/getadata/{id}")
-    public Employee getAEmployeeById(@PathVariable ObjectId id)
+    @GetMapping("/getadata")
+    public Employee getAEmployeeById(@RequestParam ObjectId id)
     {
 
         return employeeService.getAEmployee(id);
     }
 
     @PostMapping("/postadata")
-    public String createEmployeeDetails(@RequestBody Employee employee) {
+    public String createEmployeeDetails(@RequestParam String name, @RequestParam Double salary) {
 
-        return employeeService.saveEmployee(employee);
+        return employeeService.saveEmployee(name,salary);
     }
 
-    @PutMapping("/updateadata/{id}")
-    public String updateEmployeeDetails(@PathVariable ObjectId id, @RequestBody Employee updatedEmployee) {
+    @PutMapping("/updateadata")
+    public String updateEmployeeDetails(@RequestParam ObjectId id, @RequestBody Employee updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 
 
 
-    @DeleteMapping("/deleteadata/{id}")
-    public String deleteEmployeeDetails(@PathVariable ObjectId id) {
+    @DeleteMapping("/deleteadata")
+    public String deleteEmployeeDetails(@RequestParam ObjectId id) {
 
         return employeeService.deleteEmployee(id);
     }
@@ -48,7 +48,6 @@ public class EmployeeController {
 
         return employeeService.topEmployee();
     }
-
 
 
 }

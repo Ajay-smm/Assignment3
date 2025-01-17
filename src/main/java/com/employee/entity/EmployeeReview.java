@@ -3,15 +3,15 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "EmployeeAsset")
-public class EmployeeAsset {
+@Document(collection = "EmployeeReview")
+public class EmployeeReview {
     @Id
     private ObjectId id;
 
     private String name;
-    private Integer asset;
+    private Integer review;
 
-    public EmployeeAsset() {
+    public EmployeeReview() {
 
     }
 
@@ -35,14 +35,14 @@ public class EmployeeAsset {
         this.name = name;
     }
 
-    public Integer getAsset() {
+    public Integer getReview() {
 
-        return asset;
+        return review;
     }
 
-    public void setAsset(Integer asset) {
+    public void setReview(Integer review) {
 
-        this.asset = asset;
+        this.review = review;
     }
 
 

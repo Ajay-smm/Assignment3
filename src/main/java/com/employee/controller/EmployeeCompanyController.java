@@ -15,33 +15,42 @@ public class EmployeeCompanyController {
     EmployeeCompanyService employeeCompanyService;
 
 
-    @GetMapping("/getadata/{id}")
-    public EmployeeCompany getAEmployeeCompanyById(@PathVariable ObjectId id) {
+    @GetMapping("/getadata")
+    public EmployeeCompany getAEmployeeCompanyById(@RequestParam ObjectId id) {
         return employeeCompanyService.getEmployeeCompany(id);
     }
 
-    @PostMapping("/postadata")
+    /*@PostMapping("/postadata")
     public String createEmployeeCompanyDetails(@RequestBody EmployeeCompany employeeCompany) {
 
         return employeeCompanyService.saveEmployeeCompany(employeeCompany);
+    }*/
+
+    @PostMapping("/postadata")
+    public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
+
+        return employeeCompanyService.saveEmployeeCompany(name, location);
     }
 
-    @PutMapping("/updateadata/{id}")
-    public String updateEmployeeCompanyDetails(@PathVariable ObjectId id, @RequestBody EmployeeCompany updatedEmployeeCompany) {
+
+
+
+    @PutMapping("/updateadata")
+    public String updateEmployeeCompanyDetails(@RequestParam ObjectId id, @RequestBody EmployeeCompany updatedEmployeeCompany) {
 
         return employeeCompanyService.updateEmployeeCompany(id, updatedEmployeeCompany);
     }
 
 
 
-    @DeleteMapping("/deleteadata/{id}")
-    public String deleteEmployeeCompanyDetails(@PathVariable ObjectId id) {
+    @DeleteMapping("/deleteadata")
+    public String deleteEmployeeCompanyDetails(@RequestParam ObjectId id) {
 
         return employeeCompanyService.deleteEmployeeCompany(id);
     }
 
-    @GetMapping("/getemployeebylocation/{location}")
-    public EmployeeCompany getEmployeeByLocation(@PathVariable String location) {
+    @GetMapping("/getemployeebylocation")
+    public EmployeeCompany getEmployeeByLocation(@RequestParam String location) {
 
         return employeeCompanyService.getEmployeeByLocation(location);
     }

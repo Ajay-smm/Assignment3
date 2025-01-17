@@ -11,7 +11,11 @@ public class EmployeeCompanyServiceImpl implements EmployeeCompanyService {
     EmployeeCompanyRepository employeeCompanyRepository;
 
     @Override
-    public String saveEmployeeCompany(EmployeeCompany employeeCompany) {
+    public String saveEmployeeCompany(String name, String location) {
+
+        EmployeeCompany employeeCompany = new EmployeeCompany();
+        employeeCompany.setName(name);
+        employeeCompany.setLocation(location);
 
         employeeCompanyRepository.save(employeeCompany);
         return "data posted successfully";

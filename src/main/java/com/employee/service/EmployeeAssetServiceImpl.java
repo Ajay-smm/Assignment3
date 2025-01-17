@@ -4,7 +4,6 @@ import com.employee.repository.EmployeeAssetRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -13,10 +12,14 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
     EmployeeAssetRepository employeeAssetRepository;
 
     @Override
-    public String saveEmployeeAsset(EmployeeAsset employeeAsset) {
+    public String saveEmployeeAsset(String name, Integer asset) {
+
+        EmployeeAsset employeeAsset = new EmployeeAsset();
+        employeeAsset.setName(name);
+        employeeAsset.setAsset(asset);
 
         employeeAssetRepository.save(employeeAsset);
-        return "data posted successfully";
+            return "data posted successfully";
 
     }
 
@@ -50,7 +53,7 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
 
         employeeAssetRepository.save(existingEmployeeAsset);
 
-        return "Employee updated successfully";
+            return "Employee updated successfully";
     }
 
     @Override
@@ -64,7 +67,7 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
 
         employeeAssetRepository.deleteById(id);
 
-        return " Employee deleted successfully";
+            return " Employee deleted successfully";
     }
 
     @Override

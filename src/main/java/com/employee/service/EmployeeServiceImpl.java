@@ -5,17 +5,16 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
     @Override
-    public String saveEmployee(Employee employee) {
-
+    public String saveEmployee(String name, Double salary) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setSalary(salary);
         employeeRepository.save(employee);
         return "data posted successfully";
 
