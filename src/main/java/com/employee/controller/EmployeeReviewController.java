@@ -22,7 +22,7 @@ public class EmployeeReviewController {
 
 
 
-    @GetMapping("/getadata")
+    @GetMapping("/getemployeereview")
     public EmployeeReview getAEmployeeReviewById(@RequestParam ObjectId id) {
         return employeeReviewService.getEmployeeReview(id);
     }
@@ -34,7 +34,7 @@ public class EmployeeReviewController {
     }*/
 
 
-    @PostMapping("/postadata")
+    @PostMapping("/postemployeereview")
     public String createEmployeeAssetDetails(@RequestParam String name, @RequestParam Integer review) {
 
         Employee employee = employeeService.findByName(name);
@@ -49,14 +49,14 @@ public class EmployeeReviewController {
 
 
 
-    @PutMapping("/updateadata")
+    @PutMapping("/updateemployeereview")
     public String updateEmployeeReviewDetails(@RequestParam ObjectId id, @RequestBody EmployeeReview updatedEmployeeReview) {
 
         return employeeReviewService.updateEmployeeReview(id, updatedEmployeeReview);
     }
 
 
-    @DeleteMapping("/deleteadata")
+    @DeleteMapping("/deleteemployeereview")
     public String deleteEmployeeReviewDetails(@RequestParam ObjectId id) {
 
         return employeeReviewService.deleteEmployeeReview(id);

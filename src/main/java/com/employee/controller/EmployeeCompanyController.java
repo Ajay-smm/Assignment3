@@ -24,7 +24,7 @@ public class EmployeeCompanyController {
 
 
 
-    @GetMapping("/getadata")
+    @GetMapping("/getcompanydetails")
     public EmployeeCompany getAEmployeeCompanyById(@RequestParam ObjectId id) {
         return employeeCompanyService.getEmployeeCompany(id);
     }
@@ -41,7 +41,7 @@ public class EmployeeCompanyController {
         return employeeCompanyService.saveEmployeeCompany(name, location);
     }*/
 
-    @PostMapping("/postadata")
+    @PostMapping("/postcompanydetails")
     public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
 
         Employee employee = employeeService.findByName(name);
@@ -58,7 +58,7 @@ public class EmployeeCompanyController {
 
 
 
-    @PutMapping("/updateadata")
+    @PutMapping("/updatecompanydetails")
     public String updateEmployeeCompanyDetails(@RequestParam ObjectId id, @RequestBody EmployeeCompany updatedEmployeeCompany) {
 
         return employeeCompanyService.updateEmployeeCompany(id, updatedEmployeeCompany);
@@ -66,13 +66,13 @@ public class EmployeeCompanyController {
 
 
 
-    @DeleteMapping("/deleteadata")
+    @DeleteMapping("/deletecompanydetails")
     public String deleteEmployeeCompanyDetails(@RequestParam ObjectId id) {
 
         return employeeCompanyService.deleteEmployeeCompany(id);
     }
 
-    @GetMapping("/getemployeebylocation")
+    @GetMapping("/getcompanydetailsbylocation")
     public EmployeeCompany getEmployeeByLocation(@RequestParam String location) {
 
         return employeeCompanyService.getEmployeeByLocation(location);

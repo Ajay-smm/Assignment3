@@ -1,7 +1,6 @@
 package com.employee.controller;
 import com.employee.entity.Employee;
 import com.employee.entity.EmployeeAsset;
-import com.employee.repository.EmployeeAssetRepository;
 import com.employee.service.EmployeeAssetService;
 import com.employee.service.EmployeeService;
 import org.bson.types.ObjectId;
@@ -20,12 +19,12 @@ public class EmployeeAssetController {
     EmployeeService employeeService;
 
 
-    @GetMapping("/getadata")
+    @GetMapping("/getassetdetails")
     public EmployeeAsset getAEmployeeAssetById(@RequestParam ObjectId id) {
         return employeeAssetService.getEmployeeAsset(id);
     }
 
-    @PostMapping("/postadata")
+    @PostMapping("/postassetdetails")
     public String createEmployeeAssetDetails(@RequestParam String name, @RequestParam Integer asset) {
 
         Employee employee = employeeService.findByName(name);
@@ -35,14 +34,14 @@ public class EmployeeAssetController {
         return employeeAssetService.saveEmployeeAsset(employee, asset);
     }
 
-    @PutMapping("/updateadata")
+    @PutMapping("/updateassetdetails")
     public String updateEmployeeAssetDetails(@RequestParam ObjectId id, @RequestBody EmployeeAsset updatedEmployeeAsset) {
 
         return employeeAssetService.updateEmployeeAsset(id, updatedEmployeeAsset);
     }
 
 
-    @DeleteMapping("/deleteadata")
+    @DeleteMapping("/deleteassetdetails")
     public String deleteEmployeeAssetDetails(@RequestParam ObjectId id) {
 
         return employeeAssetService.deleteEmployeeAsset(id);

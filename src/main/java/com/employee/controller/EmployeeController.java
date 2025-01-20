@@ -16,33 +16,33 @@ public class EmployeeController {
     EmployeeService employeeService;
 
 
-    @GetMapping("/getadata")
+    @GetMapping("/getemployeedata")
     public Employee getAEmployeeById(@RequestParam ObjectId id)
     {
 
         return employeeService.getAEmployee(id);
     }
 
-    @PostMapping("/postadata")
+    @PostMapping("/postemployeedata")
     public String createEmployeeDetails(@RequestParam String name, @RequestParam Double salary) {
 
         return employeeService.saveEmployee(name,salary);
     }
 
-    @PutMapping("/updateadata")
+    @PutMapping("/updateemployeedata")
     public String updateEmployeeDetails(@RequestParam ObjectId id, @RequestBody Employee updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 
 
 
-    @DeleteMapping("/deleteadata")
+    @DeleteMapping("/deleteemployeedata")
     public String deleteEmployeeDetails(@RequestParam ObjectId id) {
 
         return employeeService.deleteEmployee(id);
     }
 
-    @GetMapping("/topsalary")
+    @GetMapping("/gettopsalary")
     public Employee getTopEmployee()
     {
 
