@@ -1,5 +1,7 @@
 package com.employee.service;
+import com.employee.entity.Employee;
 import com.employee.entity.EmployeeReview;
+import com.employee.repository.EmployeeRepository;
 import com.employee.repository.EmployeeReviewRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,15 @@ public class EmployeeReviewServiceImpl  implements EmployeeReviewService {
     @Autowired
     EmployeeReviewRepository employeeReviewRepository;
 
+
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+
     @Override
-    public String saveEmployeeReview(String name, Integer review) {
+    public String saveEmployeeReview(Employee employee, Integer review) {
         EmployeeReview employeeReview = new EmployeeReview();
-        employeeReview.setName(name);
+        employeeReview.setName(employee);
         employeeReview.setReview(review);
         employeeReviewRepository.save(employeeReview);
         return "data posted successfully";

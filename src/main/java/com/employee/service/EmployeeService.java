@@ -13,6 +13,5 @@ public interface EmployeeService {
     Employee topEmployee();
 
 
-
-
+    Employee findByName(String name);
 }

@@ -1,4 +1,5 @@
 package com.employee.service;
+import com.employee.entity.Employee;
 import com.employee.entity.EmployeeCompany;
 import com.employee.repository.EmployeeCompanyRepository;
 import org.bson.types.ObjectId;
@@ -11,10 +12,10 @@ public class EmployeeCompanyServiceImpl implements EmployeeCompanyService {
     EmployeeCompanyRepository employeeCompanyRepository;
 
     @Override
-    public String saveEmployeeCompany(String name, String location) {
+    public String saveEmployeeCompany(Employee employee, String location) {
 
         EmployeeCompany employeeCompany = new EmployeeCompany();
-        employeeCompany.setName(name);
+        employeeCompany.setName(employee);
         employeeCompany.setLocation(location);
 
         employeeCompanyRepository.save(employeeCompany);

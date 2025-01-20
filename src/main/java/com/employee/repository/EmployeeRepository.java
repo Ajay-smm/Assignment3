@@ -10,6 +10,7 @@ import java.util.List;
 public interface EmployeeRepository extends MongoRepository<Employee, ObjectId> {
 
     Employee findTopByOrderBySalaryDesc();
+    Employee findByName(String name);
 
 
 }

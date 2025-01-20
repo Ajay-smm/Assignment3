@@ -1,6 +1,8 @@
 package com.employee.service;
+import com.employee.entity.Employee;
 import com.employee.entity.EmployeeAsset;
 import com.employee.repository.EmployeeAssetRepository;
+import com.employee.repository.EmployeeRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +13,16 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
     @Autowired
     EmployeeAssetRepository employeeAssetRepository;
 
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+
+
     @Override
-    public String saveEmployeeAsset(String name, Integer asset) {
+    public String saveEmployeeAsset(Employee employee, Integer asset) {
 
         EmployeeAsset employeeAsset = new EmployeeAsset();
-        employeeAsset.setName(name);
+        employeeAsset.setName(employee);
         employeeAsset.setAsset(asset);
 
         employeeAssetRepository.save(employeeAsset);

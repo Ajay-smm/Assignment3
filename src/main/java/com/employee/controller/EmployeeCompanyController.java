@@ -1,7 +1,9 @@
 package com.employee.controller;
 
+import com.employee.entity.Employee;
 import com.employee.entity.EmployeeCompany;
 import com.employee.service.EmployeeCompanyService;
+import com.employee.service.EmployeeService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,13 @@ public class EmployeeCompanyController {
 
     @Autowired
     EmployeeCompanyService employeeCompanyService;
+
+    @Autowired
+    EmployeeService employeeService;
+
+
+
+
 
 
     @GetMapping("/getadata")
@@ -26,11 +35,25 @@ public class EmployeeCompanyController {
         return employeeCompanyService.saveEmployeeCompany(employeeCompany);
     }*/
 
-    @PostMapping("/postadata")
+   /* @PostMapping("/postadata")
     public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
 
         return employeeCompanyService.saveEmployeeCompany(name, location);
+    }*/
+
+    @PostMapping("/postadata")
+    public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
+
+        Employee employee = employeeService.findByName(name);
+        if(employee == null) {
+            return "Employee not found with name: "+name;
+        }
+        return employeeCompanyService.saveEmployeeCompany(employee, location);
     }
+
+
+
+
 
 
 

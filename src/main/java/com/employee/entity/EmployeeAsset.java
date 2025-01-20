@@ -1,14 +1,18 @@
 package com.employee.entity;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "EmployeeAsset")
 public class EmployeeAsset {
     @Id
-    private ObjectId id;
+    private  ObjectId id;
 
-    private String name;
+    @DBRef
+    private Employee name;
+
+   // private String name;
     private Integer asset;
 
     public EmployeeAsset() {
@@ -25,12 +29,12 @@ public class EmployeeAsset {
         this.id = id;
     }
 
-    public String getName() {
+    public Employee getName() {
 
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Employee name) {
 
         this.name = name;
     }
