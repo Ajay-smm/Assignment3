@@ -9,10 +9,8 @@ public class EmployeeAsset {
     @Id
     private  ObjectId id;
 
-    @DBRef
-    private Employee name;
 
-   // private String name;
+   private String name;
     private Integer asset;
 
     public EmployeeAsset() {
@@ -29,12 +27,12 @@ public class EmployeeAsset {
         this.id = id;
     }
 
-    public Employee getName() {
+    public String getName() {
 
         return name;
     }
 
-    public void setName(Employee name) {
+    public void setName(String name) {
 
         this.name = name;
     }

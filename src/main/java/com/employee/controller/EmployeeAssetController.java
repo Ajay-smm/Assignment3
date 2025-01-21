@@ -1,4 +1,5 @@
 package com.employee.controller;
+
 import com.employee.entity.Employee;
 import com.employee.entity.EmployeeAsset;
 import com.employee.service.EmployeeAssetService;
@@ -6,52 +7,57 @@ import com.employee.service.EmployeeService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/employeeasset")
+@RequestMapping("/employee-asset")
 public class EmployeeAssetController {
 
     @Autowired
     EmployeeAssetService employeeAssetService;
+
     @Autowired
     EmployeeService employeeService;
 
 
-    @GetMapping("/getassetdetails")
-    public EmployeeAsset getAEmployeeAssetById(@RequestParam ObjectId id) {
-        return employeeAssetService.getEmployeeAsset(id);
+
+    @GetMapping("/get-asset-details")
+    public EmployeeAsset getAEmployeeAssetDetailsById(@RequestParam String id) {
+        ObjectId objectId = new ObjectId(id);
+        return employeeAssetService.getEmployeeAssetDetailsById(objectId);
     }
 
-    @PostMapping("/postassetdetails")
+    @PostMapping("/post-asset-details")
     public String createEmployeeAssetDetails(@RequestParam String name, @RequestParam Integer asset) {
-
         Employee employee = employeeService.findByName(name);
-        if(employee == null) {
-            return "Employee not found with name: "+name;
+        if (employee == null) {
+            return "Employee not found with name: " + name;
         }
-        return employeeAssetService.saveEmployeeAsset(employee, asset);
-    }
-
-    @PutMapping("/updateassetdetails")
-    public String updateEmployeeAssetDetails(@RequestParam ObjectId id, @RequestBody EmployeeAsset updatedEmployeeAsset) {
-
-        return employeeAssetService.updateEmployeeAsset(id, updatedEmployeeAsset);
+        return employeeAssetService.saveEmployeeAssetDetails(employee, asset);
     }
 
 
-    @DeleteMapping("/deleteassetdetails")
-    public String deleteEmployeeAssetDetails(@RequestParam ObjectId id) {
 
-        return employeeAssetService.deleteEmployeeAsset(id);
+    @PutMapping("/update-asset-details")
+    public String updateEmployeeAssetDetailsById(@RequestParam ObjectId id, @RequestBody EmployeeAsset updatedEmployeeAsset) {
+
+        return employeeAssetService.updateEmployeeAssetDetailsById(id, updatedEmployeeAsset);
     }
 
-    @GetMapping("/getemployeebyname")
-    public List<EmployeeAsset> getEmployeeByLocation(@RequestParam String name) {
 
-        return employeeAssetService.getEmployeeByName(name);
+
+    @DeleteMapping("/delete-asset-details")
+    public String deleteEmployeeAssetDetailsById(@RequestParam ObjectId id) {
+
+        return employeeAssetService.deleteEmployeeAssetDetailsById(id);
     }
 
+    @GetMapping("/get-asset-details-by-name")
+    public List<EmployeeAsset> getEmployeeAssetDetailsByName(@RequestParam String name) {
+
+        return employeeAssetService.getEmployeeAssetDetailsByName(name);
+    }
 
 }

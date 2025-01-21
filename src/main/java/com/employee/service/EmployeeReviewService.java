@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface EmployeeReviewService {
 
-    String saveEmployeeReview(Employee name, Integer review);
-    EmployeeReview getEmployeeReview(ObjectId id);
-    String updateEmployeeReview( ObjectId id,  EmployeeReview updatedEmployeeReview);
-    String deleteEmployeeReview(ObjectId id);
-    List<EmployeeReview> getEmployeeTopReviews();
+    String createEmployeeReviewDetails(Employee employee, Integer review);
+    EmployeeReview getEmployeeReviewDetailsById(ObjectId id);
+    String updateEmployeeReviewDetailsById( ObjectId id,  EmployeeReview updatedEmployeeReview);
+    String deleteEmployeeReviewDetailsById(ObjectId id);
+    List<EmployeeReview> getEmployeeReviewHighToLow();
 
 
 

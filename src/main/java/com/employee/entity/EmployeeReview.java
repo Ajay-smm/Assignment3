@@ -1,7 +1,6 @@
 package com.employee.entity;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "EmployeeReview")
@@ -9,8 +8,8 @@ public class EmployeeReview {
     @Id
     private ObjectId id;
 
-    @DBRef
-    private Employee name;
+
+    private String name;
 
     private Integer review;
 
@@ -28,12 +27,12 @@ public class EmployeeReview {
         this.id = id;
     }
 
-    public Employee getName() {
+    public String getName() {
 
         return name;
     }
 
-    public void setName(Employee name) {
+    public void setName(String name) {
 
         this.name = name;
     }

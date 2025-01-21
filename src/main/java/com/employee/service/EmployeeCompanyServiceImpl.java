@@ -6,46 +6,45 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class EmployeeCompanyServiceImpl implements EmployeeCompanyService {
     @Autowired
     EmployeeCompanyRepository employeeCompanyRepository;
 
+
+
+
     @Override
     public String saveEmployeeCompany(Employee employee, String location) {
-
         EmployeeCompany employeeCompany = new EmployeeCompany();
-        employeeCompany.setName(employee);
-        employeeCompany.setLocation(location);
+        //employeeCompany.setEmployeeId(employee.getId());
+        employeeCompany.setEmployeeName(employee.getName());
 
+        employeeCompany.setLocation(location);
         employeeCompanyRepository.save(employeeCompany);
         return "data posted successfully";
-
     }
 
-
     @Override
-    public EmployeeCompany getEmployeeCompany (ObjectId id) {
+    public EmployeeCompany getEmployeeCompanyById(ObjectId id) {
         EmployeeCompany employeeCompany = employeeCompanyRepository.findById(id).orElse(null);
-
-        if (employeeCompany != null) {
-            return employeeCompany;
-        } else {
-            throw new RuntimeException("Employee not found with id: " + id);
+        if (employeeCompany == null) {
+            throw new RuntimeException("Employee company not found with id: " + id);
         }
 
+         return employeeCompany;
     }
-
     @Override
-    public String updateEmployeeCompany(ObjectId id,  EmployeeCompany updatedEmployeeCompany) {
+    public String updateEmployeeCompanyDetailsById(ObjectId id,  EmployeeCompany updatedEmployeeCompany) {
         EmployeeCompany existingEmployeeCompany = employeeCompanyRepository.findById(id).orElse(null);
 
         if (existingEmployeeCompany == null) {
             throw new RuntimeException("Employee not found with id: " + id);
         }
 
-        if (updatedEmployeeCompany.getName() != null) {
-            existingEmployeeCompany.setName(updatedEmployeeCompany.getName());
+        if (updatedEmployeeCompany.getEmployeeName() != null) {
+            existingEmployeeCompany.setEmployeeName(updatedEmployeeCompany.getEmployeeName());
         }
         if (updatedEmployeeCompany.getLocation() != null) {
             existingEmployeeCompany.setLocation(updatedEmployeeCompany.getLocation());
@@ -57,7 +56,7 @@ public class EmployeeCompanyServiceImpl implements EmployeeCompanyService {
     }
 
     @Override
-    public String deleteEmployeeCompany(ObjectId id) {
+    public String deleteEmployeeCompanyDetailsById(ObjectId id) {
 
         EmployeeCompany existingEmployeeCompany = employeeCompanyRepository.findById(id).orElse(null);
 
@@ -71,8 +70,8 @@ public class EmployeeCompanyServiceImpl implements EmployeeCompanyService {
     }
 
     @Override
-    public EmployeeCompany getEmployeeByLocation(String location){
-          return employeeCompanyRepository.findByLocation(location);
+    public EmployeeCompany getEmployeeCompanyDetailsByLocation(String location){
+        return employeeCompanyRepository.findByLocation(location);
 
     }
 

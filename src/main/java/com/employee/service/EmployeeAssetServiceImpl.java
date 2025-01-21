@@ -2,49 +2,46 @@ package com.employee.service;
 import com.employee.entity.Employee;
 import com.employee.entity.EmployeeAsset;
 import com.employee.repository.EmployeeAssetRepository;
-import com.employee.repository.EmployeeRepository;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 
 @Service
 public class EmployeeAssetServiceImpl implements EmployeeAssetService {
     @Autowired
     EmployeeAssetRepository employeeAssetRepository;
 
-    @Autowired
-    EmployeeRepository employeeRepository;
 
 
 
     @Override
-    public String saveEmployeeAsset(Employee employee, Integer asset) {
-
+    public String saveEmployeeAssetDetails(Employee employee, Integer asset) {
         EmployeeAsset employeeAsset = new EmployeeAsset();
-        employeeAsset.setName(employee);
+        //employeeAsset.setEmployeeId(employee.getId());
+        employeeAsset.setName(employee.getName());
+
         employeeAsset.setAsset(asset);
-
         employeeAssetRepository.save(employeeAsset);
-            return "data posted successfully";
-
+        return "data posted successfully";
     }
 
 
-    @Override
-    public EmployeeAsset getEmployeeAsset (ObjectId id) {
-        EmployeeAsset employeeAsset = employeeAssetRepository.findById(id).orElse(null);
 
-        if (employeeAsset != null) {
-            return employeeAsset;
-        } else {
-            throw new RuntimeException("Employee not found with id: " + id);
+    @Override
+    public EmployeeAsset getEmployeeAssetDetailsById(ObjectId id) {
+        EmployeeAsset employeeAsset = employeeAssetRepository.findById(id).orElse(null);
+        if (employeeAsset == null) {
+            throw new RuntimeException("Employee company not found with id: " + id);
         }
 
+        return employeeAsset;
     }
-
     @Override
-    public String updateEmployeeAsset(ObjectId id,  EmployeeAsset updatedEmployeeAsset) {
+    public String updateEmployeeAssetDetailsById(ObjectId id,  EmployeeAsset updatedEmployeeAsset) {
         EmployeeAsset existingEmployeeAsset = employeeAssetRepository.findById(id).orElse(null);
 
         if (existingEmployeeAsset == null) {
@@ -60,11 +57,11 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
 
         employeeAssetRepository.save(existingEmployeeAsset);
 
-            return "Employee updated successfully";
+        return "Employee updated successfully";
     }
 
     @Override
-    public String deleteEmployeeAsset(ObjectId id) {
+    public String deleteEmployeeAssetDetailsById(ObjectId id) {
 
         EmployeeAsset existingEmployeeAsset = employeeAssetRepository.findById(id).orElse(null);
 
@@ -74,11 +71,11 @@ public class EmployeeAssetServiceImpl implements EmployeeAssetService {
 
         employeeAssetRepository.deleteById(id);
 
-            return " Employee deleted successfully";
+        return " Employee deleted successfully";
     }
 
     @Override
-    public List<EmployeeAsset> getEmployeeByName(String name){
+    public List<EmployeeAsset> getEmployeeAssetDetailsByName(String name){
         return employeeAssetRepository.findByName(name);
 
     }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/employeecompany")
+@RequestMapping("/employee-company")
 public class EmployeeCompanyController {
 
     @Autowired
@@ -21,62 +21,48 @@ public class EmployeeCompanyController {
 
 
 
-
-
-
-    @GetMapping("/getcompanydetails")
-    public EmployeeCompany getAEmployeeCompanyById(@RequestParam ObjectId id) {
-        return employeeCompanyService.getEmployeeCompany(id);
+    @GetMapping("/get-company-details")
+    public EmployeeCompany getAEmployeeCompanyDetailsById(@RequestParam String id) {
+        ObjectId objectId = new ObjectId(id);
+        return employeeCompanyService.getEmployeeCompanyById(objectId);
     }
 
-    /*@PostMapping("/postadata")
-    public String createEmployeeCompanyDetails(@RequestBody EmployeeCompany employeeCompany) {
-
-        return employeeCompanyService.saveEmployeeCompany(employeeCompany);
-    }*/
-
-   /* @PostMapping("/postadata")
+    @PostMapping("/post-company-details")
     public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
-
-        return employeeCompanyService.saveEmployeeCompany(name, location);
-    }*/
-
-    @PostMapping("/postcompanydetails")
-    public String createEmployeeCompanyDetails(@RequestParam String name, @RequestParam String location) {
-
         Employee employee = employeeService.findByName(name);
-        if(employee == null) {
-            return "Employee not found with name: "+name;
+        if (employee == null) {
+            return "Employee not found with name: " + name;
         }
         return employeeCompanyService.saveEmployeeCompany(employee, location);
     }
 
 
 
+    @PutMapping("/update-company-details")
+    public String updateEmployeeCompanyDetailsById(@RequestParam ObjectId id, @RequestBody EmployeeCompany updatedEmployeeCompany) {
 
-
-
-
-
-    @PutMapping("/updatecompanydetails")
-    public String updateEmployeeCompanyDetails(@RequestParam ObjectId id, @RequestBody EmployeeCompany updatedEmployeeCompany) {
-
-        return employeeCompanyService.updateEmployeeCompany(id, updatedEmployeeCompany);
+        return employeeCompanyService.updateEmployeeCompanyDetailsById(id, updatedEmployeeCompany);
     }
 
 
 
-    @DeleteMapping("/deletecompanydetails")
+    @DeleteMapping("/delete-company-details")
     public String deleteEmployeeCompanyDetails(@RequestParam ObjectId id) {
 
-        return employeeCompanyService.deleteEmployeeCompany(id);
+        return employeeCompanyService.deleteEmployeeCompanyDetailsById(id);
     }
 
-    @GetMapping("/getcompanydetailsbylocation")
+    @GetMapping("/get-employee-details-by-location")
     public EmployeeCompany getEmployeeByLocation(@RequestParam String location) {
 
-        return employeeCompanyService.getEmployeeByLocation(location);
+        return employeeCompanyService.getEmployeeCompanyDetailsByLocation(location);
     }
+
+
+
+
+
+
 
 
 }

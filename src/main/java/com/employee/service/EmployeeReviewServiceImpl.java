@@ -1,48 +1,45 @@
 package com.employee.service;
 import com.employee.entity.Employee;
 import com.employee.entity.EmployeeReview;
-import com.employee.repository.EmployeeRepository;
 import com.employee.repository.EmployeeReviewRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+
 @Service
-public class EmployeeReviewServiceImpl  implements EmployeeReviewService {
+public class EmployeeReviewServiceImpl implements EmployeeReviewService {
     @Autowired
     EmployeeReviewRepository employeeReviewRepository;
 
 
-    @Autowired
-    EmployeeRepository employeeRepository;
 
 
     @Override
-    public String saveEmployeeReview(Employee employee, Integer review) {
+    public String createEmployeeReviewDetails(Employee employee, Integer review) {
         EmployeeReview employeeReview = new EmployeeReview();
-        employeeReview.setName(employee);
+        //employeeCompany.setEmployeeId(employee.getId());
+
+        employeeReview.setName(employee.getName());
+
         employeeReview.setReview(review);
         employeeReviewRepository.save(employeeReview);
         return "data posted successfully";
-
     }
 
-
     @Override
-    public EmployeeReview getEmployeeReview (ObjectId id) {
+    public EmployeeReview getEmployeeReviewDetailsById(ObjectId id) {
         EmployeeReview employeeReview = employeeReviewRepository.findById(id).orElse(null);
-
-        if (employeeReview != null) {
-            return employeeReview;
-        } else {
-            throw new RuntimeException("Employee not found with id: " + id);
+        if (employeeReview == null) {
+            throw new RuntimeException("Employee company not found with id: " + id);
         }
 
+        return employeeReview;
     }
-
     @Override
-    public String updateEmployeeReview(ObjectId id,  EmployeeReview updatedEmployeeReview) {
+    public String updateEmployeeReviewDetailsById(ObjectId id,  EmployeeReview updatedEmployeeReview) {
         EmployeeReview existingEmployeeReview = employeeReviewRepository.findById(id).orElse(null);
 
         if (existingEmployeeReview == null) {
@@ -62,7 +59,7 @@ public class EmployeeReviewServiceImpl  implements EmployeeReviewService {
     }
 
     @Override
-    public String deleteEmployeeReview(ObjectId id) {
+    public String deleteEmployeeReviewDetailsById(ObjectId id) {
 
         EmployeeReview existingEmployeeReview = employeeReviewRepository.findById(id).orElse(null);
 
@@ -76,11 +73,10 @@ public class EmployeeReviewServiceImpl  implements EmployeeReviewService {
     }
 
     @Override
-    public List<EmployeeReview> getEmployeeTopReviews(){
+    public List<EmployeeReview> getEmployeeReviewHighToLow() {
         return employeeReviewRepository.findAllByOrderByReviewDesc();
 
     }
-
 
 
 

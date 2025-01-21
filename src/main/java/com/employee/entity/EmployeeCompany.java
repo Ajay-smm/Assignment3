@@ -1,7 +1,6 @@
 package com.employee.entity;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "EmployeeCompany")
@@ -9,11 +8,14 @@ public class EmployeeCompany {
     @Id
     private ObjectId id;
 
-    //private String name;
-    @DBRef
-    private Employee name;
 
+    private String employeeName;
     private String location;
+
+
+
+
+
 
     public EmployeeCompany() {
 
@@ -29,23 +31,15 @@ public class EmployeeCompany {
         this.id = id;
     }
 
+    public String getEmployeeName() {
+        return employeeName;
+    }
 
-
-    public Employee getName() {
-
-        return name;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
 
-
-
-
-
-
-    public void setName(Employee name) {
-
-        this.name = name;
-    }
 
     public String getLocation() {
 
@@ -56,6 +50,10 @@ public class EmployeeCompany {
 
         this.location = location;
     }
+
+
+
+
 
 
 }
